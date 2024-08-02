@@ -1,0 +1,40 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        working_dir: /var/www
+        restart:  unless-stopped
+        volumes:
+            - .:/var/www
+        networks:
+            - application
+        depends_on:
+            - db
+    db:
+        image: postgres:16
+        restart:  unless-stopped
+        environment:
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_USER=admim
+            - POSTGRES_DB=help_desk
+        ports:
+            - '5432:5432'
+        volumes:
+            - /.db:/var/lib/postgresql/data
+        networks:
+            - application
+    nginx:
+        image: nginx:1.27
+        restart: unless-stopped
+        ports:
+            - "8000:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - application
+
+networks:
+    application:
+        driver: bridge
