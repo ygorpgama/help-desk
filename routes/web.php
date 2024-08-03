@@ -3,5 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    "Something";
+    return view("pages.dashboard");
 });
+
+require 'auth.php';
