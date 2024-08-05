@@ -1,4 +1,4 @@
-<nav class="bg-blue-950 p-4 flex justify-between ">
+<nav class="bg-stone-700 p-4 flex justify-between ">
     <span class="text-white font-semibold">Logo</span>
     <div>
         <ul class="list flex">

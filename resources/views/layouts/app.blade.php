@@ -7,11 +7,11 @@
     <title>@yield('headerTitle')</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-slate-300">
+<body class="bg-slate-800">
     <header>
         <x-navbar></x-navbar>
     </header>
-    <div class="container m-auto mt-10">
+    <div class="m-auto">
         @yield('content')
     </div>
 </body>
