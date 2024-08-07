@@ -9,19 +9,18 @@ services:
             - .:/var/www
         networks:
             - application
-        depends_on:
-            - db
+
     db:
         image: postgres:16
         restart:  unless-stopped
         environment:
             - POSTGRES_PASSWORD=admin
-            - POSTGRES_USER=admim
             - POSTGRES_DB=help_desk
+            - POSTGRES_USER=admin
         ports:
             - '5432:5432'
         volumes:
-            - /.db:/var/lib/postgresql/data
+            - .db:/var/lib/postgresql/data
         networks:
             - application
     nginx:
