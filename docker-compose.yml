@@ -23,6 +23,21 @@ services:
             - .db:/var/lib/postgresql/data
         networks:
             - application
+    db-test:
+        env_file:
+            - ./.env.testing
+        image: postgres:16
+        restart:  unless-stopped
+        environment:
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_DB=${DB_DATABASE}
+            - POSTGRES_USER=${DB_USERNAME}
+        ports:
+            - '9000:5432'
+        volumes:
+            - .docker/pgsql/db-test:/var/lib/postgresql/data
+        networks:
+            - application
     nginx:
         image: nginx:1.27
         restart: unless-stopped
