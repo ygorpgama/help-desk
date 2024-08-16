@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Cause;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,8 +29,11 @@ class TaskFactory extends Factory
     {
         return [
             "description" => fake()->text(),
-            "image_link" => fake()->link(),
+            "image_link" => null,
             "status" => true,
+            "user_id" => User::factory(),
+            "technician_id" => User::factory(),
+            "cause_id" => Cause::factory()
         ];
     }
 
