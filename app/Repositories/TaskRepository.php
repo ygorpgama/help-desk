@@ -7,15 +7,16 @@ use App\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
 
 class TaskRepository implements TaskRepositoryContract {
-    public function create(int $userId, int $technicianId, int $causeId, string $description, ?string $image = null): Task{
-        $newTask = Task::create([
-            "user_id" => $userId,
-            "technician_id" => $technicianId,
-            "cause_id" => $causeId,
-            "image_link" => $image,
-            "description" => $description
-        ]);
-        return $newTask;
+    public function create(int $user_id, int $technician_id, int $cause_id, string $description, ?string $image_link = null){
+        $task = new Task();
+        $task->user_id = $user_id;
+        $task->technician_id = $technician_id;
+        $task->cause_id = $cause_id;
+        $task->description = $description;
+        $task->image_link = $image_link;
+
+        $task->save();
+        return $task;
     }
 
     public function findAll(): Collection
@@ -27,10 +28,10 @@ class TaskRepository implements TaskRepositoryContract {
         return Task::find($taskId);
     }
 
-    public function update(Task $task, string $description, int $causeId, string | null $imageLink){
+    public function update(Task $task, string $description, int $cause_id, string | null $image_link){
         $task->description = $description;
-        $task->cause_id = $causeId;
-        $task->image_link = $imageLink;
+        $task->cause_id = $cause_id;
+        $task->image_link = $image_link;
         $task->save();
         return $task;
     }
@@ -40,5 +41,15 @@ class TaskRepository implements TaskRepositoryContract {
         $task->status = false;
         $task->save();
         return $task;
+    }
+
+    public function countAll(int $user_id)
+    {
+        return Task::where('id', $user_id)->count();
+    }
+
+    public function findLatests(int $user_id): Collection
+    {
+        return Task::where('id', $user_id)->orderBy('created_at', "DESC")->limit(5)->get();
     }
 }

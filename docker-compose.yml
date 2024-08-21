@@ -24,14 +24,12 @@ services:
         networks:
             - application
     db-test:
-        env_file:
-            - ./.env.testing
         image: postgres:16
         restart:  unless-stopped
         environment:
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
-            - POSTGRES_DB=${DB_DATABASE}
-            - POSTGRES_USER=${DB_USERNAME}
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=testing
+            - POSTGRES_USER=root
         ports:
             - '9000:5432'
         volumes:
@@ -42,7 +40,7 @@ services:
         image: nginx:1.27
         restart: unless-stopped
         ports:
-            - "8000:80"
+            - "8080:80"
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
