@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+    h3{
+        @apply text-base font-bold uppercase font-mono mb-8
+
+    }
+}
+
+@layer components {
+    .btn {
+        @apply bg-transparent cursor-pointer p-2 rounded font-semibold
+    }
+
+    .box-items{
+        @apply bg-orange-400 w-56 text-center h-60 mr-2 rounded
+    }
+
+    .count {
+        @apply ring-2 px-6 py-3 text-4xl;
+        border-radius: 100%;
+    }
+
+    /* .quadros{} */
+}
