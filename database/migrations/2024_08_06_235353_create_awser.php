@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('awsesrs', fn(Blueprint $table) => $table->dropForeign(['task_id']));
-        Schema::dropIfExists('awsesrs');
+        Schema::table('awsers', fn(Blueprint $table) => $table->dropForeign(['task_id']));
+        Schema::dropIfExists('awsers');
     }
 };

@@ -11,31 +11,30 @@ services:
             - application
 
     db:
-        image: postgres:16
-        restart:  unless-stopped
+        image: mysql:5.7.22
+        restart: unless-stopped
         environment:
-            - POSTGRES_PASSWORD=admin
-            - POSTGRES_DB=help_desk
-            - POSTGRES_USER=admin
+            MYSQL_DATABASE: help_desk
+            MYSQL_ROOT_PASSWORD: root
         ports:
-            - '5432:5432'
+            - '3388:3306'
         volumes:
             - .db:/var/lib/postgresql/data
         networks:
             - application
-    db-test:
-        image: postgres:16
-        restart:  unless-stopped
-        environment:
-            - POSTGRES_PASSWORD=root
-            - POSTGRES_DB=testing
-            - POSTGRES_USER=root
-        ports:
-            - '9000:5432'
-        volumes:
-            - .docker/pgsql/db-test:/var/lib/postgresql/data
-        networks:
-            - application
+    # db-test:
+    #     image: postgres:16
+    #     restart:  unless-stopped
+    #     environment:
+    #         - POSTGRES_PASSWORD=root
+    #         - POSTGRES_DB=testing
+    #         - POSTGRES_USER=root
+    #     ports:
+    #         - '9000:5432'
+    #     volumes:
+    #         - .docker/pgsql/db-test:/var/lib/postgresql/data
+    #     networks:
+    #         - application
     nginx:
         image: nginx:1.27
         restart: unless-stopped

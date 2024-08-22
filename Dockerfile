@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpq-dev
 
-RUN docker-php-ext-install pgsql gd sockets mbstring exif pcntl bcmath pdo_pgsql pdo
+RUN docker-php-ext-install pgsql mysqli pdo_mysql gd sockets mbstring exif pcntl bcmath pdo_pgsql pdo
 
 # Copy composer image from docker
 COPY --from=composer:2.7.4 /usr/bin/composer /usr/bin/composer

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cause_id');
             $table->string('image_link')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('technician_id');
+            $table->unsignedBigInteger('technician_id')->nullable();
             $table->boolean('status');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('technician_id')->references('id')->on('users');
