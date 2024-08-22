@@ -17,6 +17,7 @@ class DashboardController extends Controller
         [
             "latestsTasks" => $this->taskService->latestTasks(),
             "countTasks" => $this->taskService->countTasks(),
+            "completedsTasks" => $this->taskService->countCompletedTasks(),
         ]
     );
     }

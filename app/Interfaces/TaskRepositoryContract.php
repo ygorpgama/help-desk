@@ -14,4 +14,5 @@ interface TaskRepositoryContract
     public function findAll(): Collection;
     public function findLatests(int $user_id): Collection;
     public function countAll(int $user_id);
+    public function countCompleteds(int $user_id);
 }

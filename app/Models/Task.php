@@ -16,7 +16,7 @@ class Task extends Model
         "technician_id",
         "cause_id" ,
         "image_link" ,
-        "status",
+        "status_task_id",
         "description"
     ];
 
@@ -34,6 +34,10 @@ class Task extends Model
 
     public function cause(): BelongsTo {
         return $this->belongsTo(Cause::class);
+    }
+
+    public function status() : BelongsTo{
+        return $this->belongsTo(StatusTask::class, 'status_task_id', 'id');
     }
 }
 

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Cause;
+use App\Models\StatusTask;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,7 +31,7 @@ class TaskFactory extends Factory
         return [
             "description" => fake()->text(),
             "image_link" => null,
-            "status" => true,
+            "status_task_id" => StatusTask::factory(),
             "user_id" => User::factory(),
             "technician_id" => User::factory(),
             "cause_id" => Cause::factory()

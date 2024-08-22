@@ -36,6 +36,10 @@ class TaskService{
         return $this->taskInterface->countAll(1);
     }
 
+    public function countCompletedTasks(){
+        return $this->taskInterface->countCompleteds(1);
+    }
+
     public function update(){
 
     }

@@ -45,11 +45,16 @@ class TaskRepository implements TaskRepositoryContract {
 
     public function countAll(int $user_id)
     {
-        return Task::where('id', $user_id)->count();
+        return Task::where('user_id', $user_id)->count();
+    }
+
+    public function countCompleteds(int $user_id){
+        return Task::where('user_id', $user_id)->where('status_task_id', 1)->count();
     }
 
     public function findLatests(int $user_id): Collection
     {
-        return Task::where('id', $user_id)->orderBy('created_at', "DESC")->limit(5)->get();
+        return Task::with(["cause", "status"])->where('user_id', $user_id)->orderBy('id', 'DESC')->limit(5)->get();
     }
+
 }

@@ -7,6 +7,10 @@
         @apply text-base font-bold uppercase font-mono mb-8
 
     }
+
+    h2 {
+        @apply font-bold uppercase text-xl font-mono mb-5
+    }
 }
 
 @layer components {
