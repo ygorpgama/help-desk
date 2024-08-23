@@ -7,13 +7,13 @@ use App\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
 
 class TaskRepository implements TaskRepositoryContract {
-    public function create(int $user_id, int $technician_id, int $cause_id, string $description, ?string $image_link = null){
+    public function create(int $user_id, int $cause_id, string $description, ?string $image_link = null){
         $task = new Task();
         $task->user_id = $user_id;
-        $task->technician_id = $technician_id;
         $task->cause_id = $cause_id;
         $task->description = $description;
         $task->image_link = $image_link;
+        $task->status_task_id = 1;
 
         $task->save();
         return $task;

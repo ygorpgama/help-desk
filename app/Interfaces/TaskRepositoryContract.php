@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface TaskRepositoryContract
 {
-    public function create(int $user_id, int $technician_id, int $cause_id,  string $description, ?string $image_link = null);
+    public function create(int $user_id, int $cause_id,  string $description, ?string $image_link = null);
     public function findById(int $taskId): ?Task;
     public function update(Task $task, string $description, int $causeId, string | null $imageLink);
     public function delete(Task $task): Task;

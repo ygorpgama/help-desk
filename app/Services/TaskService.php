@@ -3,23 +3,23 @@
 namespace App\Services;
 
 use App\Http\Requests\TaskRequest;
+use App\Interfaces\CauseRepositoryContract;
 use App\Interfaces\TaskRepositoryContract;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class TaskService{
-    public function __construct(protected TaskRepositoryContract $taskInterface){}
+    public function __construct(protected TaskRepositoryContract $taskInterface, private CauseRepositoryContract $causeInterface){}
 
     public function create(TaskRequest $taksItems){
         $user = 1;
         $task = null;
         if ($taksItems->has('image')) {
-            $imageLink = null;
-            dd($taksItems->image);
-            $task = $this->taskInterface->create($user, $taksItems['technician_id'], $taksItems["cause_id"], $taksItems["description"],  $imageLink);
+            $fileName = time().$taksItems->file('image')->getClientOriginalName();
+            $path = $taksItems->file('image')->storeAs('tasks/images', $fileName, 'public');
+            $imageLink = '/storage/'.$path;
+            $task = $this->taskInterface->create($user, $taksItems["cause_id"], $taksItems["description"],  $imageLink);
         }else{
-            $task = $this->taskInterface->create($user, $taksItems['technician_id'], $taksItems["cause_id"], $taksItems["description"]);
-
+            $task = $this->taskInterface->create($user, $taksItems["cause_id"], $taksItems["description"]);
         }
         return $task;
     }
@@ -38,6 +38,10 @@ class TaskService{
 
     public function countCompletedTasks(){
         return $this->taskInterface->countCompleteds(1);
+    }
+
+    public function showCauses(){
+        return $this->causeInterface->findAll();
     }
 
     public function update(){

@@ -31,5 +31,13 @@
         border-radius: 100%;
     }
 
+    .label {
+        @apply block mb-1 text-stone-700 font-semibold;
+    }
+
+    .form-input {
+        @apply bg-gray-300 rounded p-2 text-stone-600 font-semibold  w-full;
+    }
+
     /* .quadros{} */
 }

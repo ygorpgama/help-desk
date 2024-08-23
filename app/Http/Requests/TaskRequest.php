@@ -22,7 +22,6 @@ class TaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "technician_id" => ['required'],
             "cause_id" => ['required'],
             "description" => ['required', "max:255"],
             "image" => ['nullable', 'image']

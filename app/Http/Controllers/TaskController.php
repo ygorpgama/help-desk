@@ -29,7 +29,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-
+        return view('pages.task-create', ["taskCauses" => $this->taskService->showCauses()]);
     }
 
     /**
@@ -39,7 +39,6 @@ class TaskController extends Controller
     {
         try {
             $task = $this->taskService->create($request);
-
             return redirect()->route('task.index')->with(["success" => "Chamado #{$task->id} aberto com sucesso"]);
         } catch (\Throwable $th) {
             dd($th->getMessage());

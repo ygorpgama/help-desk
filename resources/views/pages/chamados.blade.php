@@ -7,6 +7,11 @@
 
 @section('content')
     <main class="m-auto mt-6 container px-3 md:px-auto">
+        @if (session('success'))
+            <div class="bg-green-300 text-white font-bold justify-center flex items-center h-20 rounded mb-8">
+                {{ session('success') }}
+            </div>
+        @endif
         <section >
                 @if (count($tasks) > 0)
                     <h2 class="text-center text-white">Meus chamados</h2>
