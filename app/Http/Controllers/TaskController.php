@@ -19,8 +19,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = $this->taskService->findAll();
-        return "<h1>$task</h1>";
+        return view('pages.chamados', [
+            'tasks' =>  $this->taskService->findAll()
+        ]);
     }
 
     /**

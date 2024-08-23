@@ -11,7 +11,7 @@ interface TaskRepositoryContract
     public function findById(int $taskId): ?Task;
     public function update(Task $task, string $description, int $causeId, string | null $imageLink);
     public function delete(Task $task): Task;
-    public function findAll(): Collection;
+    public function findAll(int $user_id);
     public function findLatests(int $user_id): Collection;
     public function countAll(int $user_id);
     public function countCompleteds(int $user_id);

@@ -24,8 +24,8 @@ class TaskService{
         return $task;
     }
 
-    public function findAll(): Collection{
-        return $this->taskInterface->findAll();
+    public function findAll(){
+        return $this->taskInterface->findAll(1);
     }
 
     public function latestTasks(): Collection{

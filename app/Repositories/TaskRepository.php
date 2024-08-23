@@ -19,9 +19,9 @@ class TaskRepository implements TaskRepositoryContract {
         return $task;
     }
 
-    public function findAll(): Collection
+    public function findAll(int $user_id)
     {
-        return Task::all();
+        return Task::with(['cause', 'status'])->where('user_id', $user_id)->paginate(12);
     }
 
     public function findById(int $taskId): ?Task{

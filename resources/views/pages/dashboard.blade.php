@@ -18,8 +18,8 @@
                             @endforeach
                             <th  class=" border px-2 py-4 border-slate-600"></th>
                         </thead>
-                        <tbody class="bg-slate-200">
-                            @foreach ($latestsTasks as $task)
+                            <tbody class="bg-slate-200">
+                                @foreach ($latestsTasks as $task)
                                 <tr>
                                     <td class="border py-3 px-2 text-black border-slate-700">{{$task->id}}</td>
                                     <td class="border py-3 px-2 text-black border-slate-700">{{$task->description}}</td>
