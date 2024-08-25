@@ -39,6 +39,7 @@ class TaskSeeder extends Seeder
                 Task::factory()->count(10)->create([
                     "user_id" => $user->id,
                     "status_task_id" => $st->id,
+                    "cause_id" => random_int(1, 3),
                 ]);
             }
         });
