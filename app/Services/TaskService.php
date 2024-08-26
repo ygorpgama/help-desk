@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\TaskRequest;
 use App\Interfaces\CauseRepositoryContract;
 use App\Interfaces\TaskRepositoryContract;
+use App\Models\Task;
 use Illuminate\Support\Collection;
 
 class TaskService{
@@ -51,5 +52,10 @@ class TaskService{
 
     public function update(){
 
+    }
+
+    public function delete(int $id){
+        $task = $this->taskInterface->findById($id);
+        $this->taskInterface->delete($task);
     }
 }

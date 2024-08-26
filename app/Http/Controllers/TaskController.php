@@ -55,7 +55,7 @@ class TaskController extends Controller
         try {
            return view('pages.task', ["task" => $this->taskService->findById($task->id)]);
         } catch (\Throwable $th) {
-            dd($th);
+           return redirect('/');
         }
     }
 
@@ -78,8 +78,9 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
-
+        $this->taskService->delete($task->id);
+        return redirect()->route('task.index')->with(['success' => "Chamado cancelado com sucess"]);
     }
 }

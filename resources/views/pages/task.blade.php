@@ -2,10 +2,6 @@
 
 @section('headerTitle', 'Task')
 
-@php
-    dump($task->image_link);
-@endphp
-
 @section('content')
     <main class="mt-6 container m-auto">
         <div class="p-4 bg-slate-400 w-full rounded">
@@ -30,7 +26,7 @@
             </section>
             @if ($task->status->id === 2)
                 <div class="mt-4">
-                    <form action="task/{{$task->id}}" method="POST">
+                    <form action="{{$task->id}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn bg-red-500">Cancelar chamado</button>

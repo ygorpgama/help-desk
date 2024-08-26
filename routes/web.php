@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name("dashboard.index");
 
-Route::resource('task', TaskController::class);
+Route::resource('task', TaskController::class)->except(['edit', 'update']);
 
 require 'auth.php';

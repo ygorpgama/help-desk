@@ -24,14 +24,14 @@ class TaskRepository implements TaskRepositoryContract {
         return Task::with(['cause', 'status'])->where('user_id', $user_id)->paginate(12);
     }
 
-    public function findById(int $taskId, array $relation = null): ?Task{        
+    public function findById(int $taskId, array $relation = null): ?Task{
         $query =Task::find($taskId);
-        
+
         if ($relation) {
             $query->with($relation);
         }
 
-        
+
         return $query;
     }
 
@@ -45,7 +45,7 @@ class TaskRepository implements TaskRepositoryContract {
 
     public function delete(Task $task): Task
     {
-        $task->status = false;
+        $task->status_task_id = 3;
         $task->save();
         return $task;
     }
