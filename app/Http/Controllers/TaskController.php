@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
 use App\Interfaces\TaskRepositoryContract;
+use App\Models\Task;
 use App\Services\TaskService;
 use Illuminate\Http\Request;
 
@@ -49,9 +50,13 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
-        //
+        try {
+           return view('pages.task', ["task" => $this->taskService->findById($task->id)]);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
     }
 
     /**
@@ -75,6 +80,6 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
 }

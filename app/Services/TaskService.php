@@ -14,14 +14,19 @@ class TaskService{
         $user = 1;
         $task = null;
         if ($taksItems->has('image')) {
-            $fileName = time().$taksItems->file('image')->getClientOriginalName();
-            $path = $taksItems->file('image')->storeAs('tasks/images', $fileName, 'public');
+            $image = $taksItems->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $path = $image->storeAs('tasks/images', $fileName, 'public');
             $imageLink = '/storage/'.$path;
             $task = $this->taskInterface->create($user, $taksItems["cause_id"], $taksItems["description"],  $imageLink);
         }else{
             $task = $this->taskInterface->create($user, $taksItems["cause_id"], $taksItems["description"]);
         }
         return $task;
+    }
+
+    public function findById(int $taskId){
+        return $this->taskInterface->findById($taskId, ["cause", "status"]);
     }
 
     public function findAll(){

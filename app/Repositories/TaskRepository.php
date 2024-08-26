@@ -13,7 +13,7 @@ class TaskRepository implements TaskRepositoryContract {
         $task->cause_id = $cause_id;
         $task->description = $description;
         $task->image_link = $image_link;
-        $task->status_task_id = 1;
+        $task->status_task_id = 2;
 
         $task->save();
         return $task;
@@ -24,8 +24,15 @@ class TaskRepository implements TaskRepositoryContract {
         return Task::with(['cause', 'status'])->where('user_id', $user_id)->paginate(12);
     }
 
-    public function findById(int $taskId): ?Task{
-        return Task::find($taskId);
+    public function findById(int $taskId, array $relation = null): ?Task{        
+        $query =Task::find($taskId);
+        
+        if ($relation) {
+            $query->with($relation);
+        }
+
+        
+        return $query;
     }
 
     public function update(Task $task, string $description, int $cause_id, string | null $image_link){

@@ -8,12 +8,12 @@
     }
 
     h3{
-        @apply text-base font-bold uppercase font-mono mb-8
+        @apply text-base font-bold uppercase font-mono
 
     }
 
     h2 {
-        @apply font-bold uppercase text-xl font-mono mb-5
+        @apply font-bold uppercase text-xl font-mono
     }
 }
 
