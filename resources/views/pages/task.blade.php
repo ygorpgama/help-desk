@@ -12,6 +12,13 @@
                     <p class="font-bold text-lg uppercase">Status do chamado: {{$task->status->description}}</p>
                 </article>
 
+                <article class="">
+                    <p class=" text-lg mt-2"><span class="uppercase font-bold">Usuário:</span> {{$task->user->name}}</p>
+                    @if ($task->technician)
+                        <p class=" text-lg mt-2"><span class="uppercase font-bold">Técnico responsavel:</span> {{$task->technician->name}}</p>
+                    @endif
+                </article>
+
                 <article class="mt-5">
                     <h3 class="text-lg font-semibold">Descrição do ocorrido</h3>
                     <p class="text-lg">{{$task->description}}</p>

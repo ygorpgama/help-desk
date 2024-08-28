@@ -40,6 +40,9 @@ class TaskSeeder extends Seeder
                     "user_id" => $user->id,
                     "status_task_id" => $st->id,
                     "cause_id" => random_int(1, 3),
+                    "technician_id" => User::factory()->create([
+                        "group_id" => 2,
+                    ])
                 ]);
             }
         });

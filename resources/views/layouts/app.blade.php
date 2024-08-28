@@ -14,5 +14,6 @@
     <div class="m-auto">
         @yield('content')
     </div>
+    @vite('resources/js/alpine.js', 'resources/js/app.js')
 </body>
 </html>

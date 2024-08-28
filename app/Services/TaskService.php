@@ -5,11 +5,15 @@ namespace App\Services;
 use App\Http\Requests\TaskRequest;
 use App\Interfaces\CauseRepositoryContract;
 use App\Interfaces\TaskRepositoryContract;
+use App\Interfaces\UserRepositoryContract;
 use App\Models\Task;
 use Illuminate\Support\Collection;
 
 class TaskService{
-    public function __construct(protected TaskRepositoryContract $taskInterface, private CauseRepositoryContract $causeInterface){}
+    public function __construct(
+        protected TaskRepositoryContract $taskInterface,
+        private CauseRepositoryContract $causeInterface,
+    ){}
 
     public function create(TaskRequest $taksItems){
         $user = 1;
@@ -27,7 +31,7 @@ class TaskService{
     }
 
     public function findById(int $taskId){
-        return $this->taskInterface->findById($taskId, ["cause", "status"]);
+        return $this->taskInterface->findById($taskId, ["cause", "status", "technician", "user"]);
     }
 
     public function findAll(){
@@ -50,12 +54,16 @@ class TaskService{
         return $this->causeInterface->findAll();
     }
 
-    public function update(){
-
+    public function update(Task $task, int $technician){
+        return $this->taskInterface->update($task, $task->description, $task->cause_id, $task->image_link, $technician);
     }
 
     public function delete(int $id){
         $task = $this->taskInterface->findById($id);
         $this->taskInterface->delete($task);
+    }
+
+    public function findTaskWithoutTechnician(){
+        return $this->taskInterface->findTaskWithoutTechnician();
     }
 }

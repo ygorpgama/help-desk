@@ -16,26 +16,16 @@
                 @if (count($tasks) > 0)
                     <h2 class="text-center text-white">Meus chamados</h2>
                     <div class="flex flex-col items-center">
-                        <table class="border-collapse border  border-slate-500 table-fixed h-48 text-center w-full">
-                            <thead class="bg-slate-500">
-                                @foreach ($tableHeaders as $header)
-                                        <th  class=" border  py-4 border-slate-600">{{$header}}</th>
-                                @endforeach
-                            </thead>
-                            <tbody class="bg-slate-400">
+                        <x-table :tableHeaders="$tableHeaders">
+                            @foreach ($tasks as $task)
                                 <tr>
-                                    @foreach($tasks as $task)
-                                        <tr>
-                                            <td class=" border py-3 border-slate-600">{{$task->id}}</td>
-                                            <td class=" border py-3 border-slate-600">{{$task->cause->description}}</td>
-                                            <td class=" border py-3 border-slate-600">{{$task->status->description}}</td>
-                                            <td class=" border py-3 border-slate-600"><a class="btn text-white bg-blue-400" href="task/{{$task->id}}">Visualizar</a></td>
-                                        </tr>
-                                    @endforeach
-
+                                    <td class=" border py-3 border-slate-600">{{$task->id}}</td>
+                                    <td class=" border py-3 border-slate-600">{{$task->cause->description}}</td>
+                                    <td class=" border py-3 border-slate-600">{{$task->status->description}}</td>
+                                    <td class=" border py-3 border-slate-600"><a class="btn text-white bg-blue-400" href="task/{{$task->id}}">Visualizar</a></td>
                                 </tr>
-                            </tbody>
-                        </table>
+                            @endforeach
+                        </x-table>
                         <div class="w-3/4 mt-4">
                             {{ $tasks->links()}}
                         </div>

@@ -1,6 +1,8 @@
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer base{
     h1 {
@@ -14,6 +16,10 @@
 
     h2 {
         @apply font-bold uppercase text-xl font-mono
+    }
+
+    td {
+        @apply border py-3 border-slate-600
     }
 }
 
@@ -39,5 +45,8 @@
         @apply bg-gray-300 rounded p-2 text-stone-600 font-semibold  w-full;
     }
 
+    .mb-not-last:not(:last-child) {
+        @apply mb-4
+    }
     /* .quadros{} */
 }

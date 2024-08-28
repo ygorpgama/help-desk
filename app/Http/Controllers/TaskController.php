@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Interfaces\TaskRepositoryContract;
 use App\Models\Task;
+use App\Services\CauseService;
 use App\Services\TaskService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function __construct(protected TaskService $taskService)
+    public function __construct(private TaskService $taskService, private CauseService $causeService, private UserService $userService)
     {
 
     }
@@ -70,9 +72,18 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $request->validate([
+            "technician_id" => ['required', 'integer']
+        ]);
+
+        try {
+            $this->taskService->update($task, $request->technician_id);
+            return redirect()->route('admin.tasks')->with(["success" => "Chamada designado ao tecnico com sucesso"]);
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.tasks.edit', $task->id)->with(["failed" => "Ocorreu um problema na designação por favor tente novamente mais tarde"]);
+        }
     }
 
     /**
@@ -81,6 +92,22 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $this->taskService->delete($task->id);
-        return redirect()->route('task.index')->with(['success' => "Chamado cancelado com sucess"]);
+        return redirect()->route('task.index')->with(['success' => "Chamado cancelado com sucesso"]);
+    }
+
+    /**
+     *   Display a listing of the resource to the admin.
+     */
+    public function indexAdmin(){
+        return view('pages.task-admin', [
+            "tasks" => $this->taskService->findTaskWithoutTechnician()
+        ]);
+    }
+
+    public function editAdmin(Task $task){
+        return view('pages.task-admin-create', [
+            "users" => $this->userService->findAllActiveUsersTechinician(),
+            'task' =>  $this->taskService->findById($task->id)
+        ]);
     }
 }
