@@ -14,7 +14,7 @@
                     </button>
                     <div class=" w-36 rounded bg-slate-500" x-show="open" class="absolute top-5">
                         <a href="{{route('admin.users.index')}}" class="block">Usuários</a>
-                        <a href="" class="block">Causas</a>
+                        {{-- <a href="" class="block">Causas</a> --}}
                         <a href="{{route('admin.tasks')}}" class="block">Delegar chamado</a>
                     </div>
                 </div>
